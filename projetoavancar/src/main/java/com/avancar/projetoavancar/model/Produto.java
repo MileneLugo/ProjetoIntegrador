@@ -1,13 +1,13 @@
 package com.avancar.projetoavancar.model;
 
-import java.util.List;
+import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -15,8 +15,8 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name= "tb_categoria")
-public class Categoria {
+@Table(name= "tb_produto")
+public class Produto {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +26,13 @@ public class Categoria {
 	@Size(min = 10, max = 100, message="O campo deve ter no mínimo 10 caracteres, e no máximo 100 caracteres")
 	private String nome;
 	
-	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("categoria")
-	private List<Produto> produto;
+	@NotNull
+	@Column(precision = 6, scale = 2)
+	public BigDecimal valor;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Categoria categoria;
 
 	public Long getId() {
 		return id;
@@ -46,12 +50,20 @@ public class Categoria {
 		this.nome = nome;
 	}
 
-	public List<Produto> getProduto() {
-		return produto;
+	public BigDecimal getValor() {
+		return valor;
 	}
 
-	public void setProduto(List<Produto> produto) {
-		this.produto = produto;
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 	
 }
