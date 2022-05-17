@@ -10,7 +10,7 @@ public class UsuarioLogin {
 
 	private String senha;
 	
-	private String foto;
+	private String endereco;
 	
 	private String token;
 
@@ -46,12 +46,12 @@ public class UsuarioLogin {
 		this.senha = senha;
 	}
 
-	public String getFoto() {
-		return foto;
+	public String getEndereco() {
+		return endereco;
 	}
 
-	public void setFoto(String foto) {
-		this.foto = foto;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	public String getToken() {
